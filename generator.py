@@ -1,20 +1,17 @@
 from gigachat import GigaChat
 from config import GIGACHAT_AUTH_KEY
+from prompts import get_random_prompt
 
 def generate_joke():
     """
     Генерирует циничную IT-шутку через GigaChat.
+    Использует случайный промпт из prompts.py.
     """
-    prompt = """
-    Напиши короткую (2-3 предложения), циничную и смешную IT-шутку.
-    Стиль: как у "Сеньор на галере" — с сарказмом, про Python, разработку, баги или дедлайны.
-    Не используй смайлики.
-    """
-    
-    # ЯВНО УКАЗЫВАЕМ МОДЕЛЬ
+    prompt = get_random_prompt()
+
     with GigaChat(
         credentials=GIGACHAT_AUTH_KEY,
-        model="GigaChat-2",              # ← ДОБАВЬ ЭТУ СТРОЧКУ
+        model="GigaChat-2",
         verify_ssl_certs=False
     ) as client:
         response = client.chat(prompt)
